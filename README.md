@@ -298,7 +298,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Base Mainnet Explorer**: https://basescan.org/
 - **OpenZeppelin Docs**: https://docs.openzeppelin.com/
 - **Hardhat Docs**: https://hardhat.org/docs
-
+Update your frontend with the contract addresses:
+   DatasetToken: 0xa0a22cbB9Dd49451236936F7ef10395c1A346BC4
+   DatasetAccess: 0xE09FD11f6FC9e0C5C58Fe2F3363A898bFeF1F785
 ---
 
 **Built with ❤️ for the decentralized data economy**
