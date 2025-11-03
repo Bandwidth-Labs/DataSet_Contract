@@ -1,0 +1,26 @@
+{
+  "name": "dataset-marketplace-frontend",
+  "version": "1.0.0",
+  "description": "Decentralized Dataset Marketplace Frontend",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000 || python -m http.server 8000",
+    "dev": "python3 -m http.server 8000 || python -m http.server 8000",
+    "serve": "python3 -m http.server 8000 || python -m http.server 8000",
+    "serve-node": "npx serve . -p 8000",
+    "serve-php": "php -S localhost:8000"
+  },
+  "keywords": [
+    "blockchain",
+    "web3",
+    "dataset",
+    "marketplace",
+    "base",
+    "ethereum"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-database"></i>
+                <span>Dataset Marketplace</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#browse" class="nav-link" data-section="browse">Browse</a>
+                <a href="#create" class="nav-link" data-section="create">Create</a>
+                <a href="#my-datasets" class="nav-link" data-section="my-datasets">My Datasets</a>
+                <a href="#my-access" class="nav-link" data-section="my-access">My Access</a>
+            </div>
+            <div class="nav-actions">
+                <button id="connectWallet" class="btn btn-primary">
+                    <i class="fas fa-wallet"></i>
+                    Connect Wallet
+                </button>
+                <div id="walletInfo" class="wallet-info" style="display: none;">
+                    <span id="walletAddress"></span>
+                    <button id="disconnectWallet" class="btn btn-secondary">Disconnect</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Decentralized Dataset Marketplace</h1>
+                    <p>Buy, sell, and access datasets securely on the blockchain. Powered by Base network.</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3 id="totalDatasets">0</h3>
+                            <p>Total Datasets</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="totalSales">0</h3>
+                            <p>Total Sales</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="activeUsers">0</h3>
+                            <p>Active Users</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Browse Section -->
+        <section id="browse" class="section">
+            <div class="section-header">
+                <h2>Browse Datasets</h2>
+                <div class="search-filters">
+                    <input type="text" id="searchInput" placeholder="Search datasets..." class="search-input">
+                    <select id="sortBy" class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            <div id="datasetsGrid" class="datasets-grid">
+                <!-- Datasets will be loaded here -->
+            </div>
+            <div id="loadingSpinner" class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading datasets...</p>
+            </div>
+        </section>
+
+        <!-- Create Dataset Section -->
+        <section id="create" class="section">
+            <div class="section-header">
+                <h2>Create New Dataset</h2>
+                <p>Upload and monetize your dataset on the blockchain</p>
+            </div>
+            <div class="create-form-container">
+                <form id="createDatasetForm" class="create-form">
+                    <div class="form-group">
+                        <label for="datasetTitle">Dataset Title</label>
+                        <input type="text" id="datasetTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetDescription">Description</label>
+                        <textarea id="datasetDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetCategory">Category</label>
+                        <select id="datasetCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="finance">Finance</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="technology">Technology</option>
+                            <option value="education">Education</option>
+                            <option value="research">Research</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetFile">Dataset File</label>
+                        <input type="file" id="datasetFile" accept=".csv,.json,.xlsx,.txt" required>
+                        <small>Supported formats: CSV, JSON, XLSX, TXT</small>
+                    </div>
+                    <div class="pricing-section">
+                        <h3>Access Pricing (in ETH)</h3>
+                        <div class="pricing-grid">
+                            <div class="price-input">
+                                <label>1 Hour</label>
+                                <input type="number" id="price1h" step="0.001" min="0" placeholder="0.001">
+                            </div>
+                            <div class="price-input">
+                                <label>24 Hours</label>
+                                <input type="number" id="price24h" step="0.001" min="0" placeholder="0.01">
+                            </div>
+                            <div class="price-input">
+                                <label>7 Days</label>
+                                <input type="number" id="price7d" step="0.001" min="0" placeholder="0.05">
+                            </div>
+                            <div class="price-input">
+                                <label>30 Days</label>
+                                <input type="number" id="price30d" step="0.001" min="0" placeholder="0.1">
+                            </div>
+                            <div class="price-input">
+                                <label>90 Days</label>
+                                <input type="number" id="price90d" step="0.001" min="0" placeholder="0.2">
+                            </div>
+                            <div class="price-input">
+                                <label>365 Days</label>
+                                <input type="number" id="price365d" step="0.001" min="0" placeholder="0.5">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fas fa-upload"></i>
+                        Create Dataset
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- My Datasets Section -->
+        <section id="my-datasets" class="section">
+            <div class="section-header">
+                <h2>My Datasets</h2>
+                <p>Manage your created datasets</p>
+            </div>
+            <div id="myDatasetsGrid" class="datasets-grid">
+                <!-- User's datasets will be loaded here -->
+            </div>
+        </section>
+
+        <!-- My Access Section -->
+        <section id="my-access" class="section">
+            <div class="section-header">
+                <h2>My Access Tokens</h2>
+                <p>View and manage your dataset access tokens</p>
+            </div>
+            <div id="myAccessGrid" class="access-grid">
+                <!-- User's access tokens will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Dataset Modal -->
+    <div id="datasetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="dataset-details">
+                    <div class="dataset-info">
+                        <p id="modalDescription"></p>
+                        <div class="dataset-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-user"></i>
+                                <span id="modalOwner"></span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span id="modalCreated"></span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span id="modalSales"></span> sales
+                            </span>
+                        </div>
+                    </div>
+                    <div class="access-options">
+                        <h4>Purchase Access</h4>
+                        <div class="access-grid">
+                            <div class="access-option" data-duration="0">
+                                <div class="duration">1 Hour</div>
+                                <div class="price" id="modalPrice0">0 ETH</div>
+                                <button class="btn btn-small btn-primary">Buy Access</button>
+                            </div>
+                            <div class="access-option" data-duration="1">
+                                <div class="duration">24 Hours</div>
+                                <div class="price" id="modalPrice1">0 ETH</div>
+                                <button class="btn btn-small btn-primary">Buy Access</button>
+                            </div>
+                            <div class="access-option" data-duration="2">
+                                <div class="duration">7 Days</div>
+                                <div class="price" id="modalPrice2">0 ETH</div>
+                                <button class="btn btn-small btn-primary">Buy Access</button>
+                            </div>
+                            <div class="access-option" data-duration="3">
+                                <div class="duration">30 Days</div>
+                                <div class="price" id="modalPrice3">0 ETH</div>
+                                <button class="btn btn-small btn-primary">Buy Access</button>
+                            </div>
+                            <div class="access-option" data-duration="4">
+                                <div class="duration">90 Days</div>
+                                <div class="price" id="modalPrice4">0 ETH</div>
+                                <button class="btn btn-small btn-primary">Buy Access</button>
+                            </div>
+                            <div class="access-option" data-duration="5">
+                                <div class="duration">365 Days</div>
+                                <div class="price" id="modalPrice5">0 ETH</div>
+                                <button class="btn btn-small btn-primary">Buy Access</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingText">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="config.js"></script>
+    <script src="web3-integration.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
